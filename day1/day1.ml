@@ -1,4 +1,4 @@
-(*** PART 1 ***)
+(*** PART I ***)
 
 #use "../lib/helpers.ml"
 
@@ -18,11 +18,11 @@ let rec total l =
   match l with
   | [] -> 0
   | _ :: [] -> 0
-  | x :: y :: z -> if y > x then 1 + total ( y::z ) else total ( y::z ) ;;
+  | x :: y :: z -> if y > x then 1 + total ( y :: z ) else total ( y :: z ) ;;
 
 total int_lines ;;
 
-(*** PART 2 ***)
+(*** PART II ***)
 
 (*warning: my solution is totally not scalable for an arbitraty
 window of length n*)

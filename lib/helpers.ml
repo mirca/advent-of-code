@@ -17,3 +17,9 @@ let lines_of_file filename =
   let lines = read_lines ic in
   close_in ic;
   (lines)
+
+(* convert list of strings to list of ints*)
+let rec list_string_to_int l =
+  match l with
+  | [] -> []
+  | h :: t -> (int_of_string h) :: list_string_to_int t ;;

@@ -5,11 +5,6 @@
 let lines = lines_of_file "input.txt" ;;
 
 (* convert list of strings to list of ints*)
-let rec list_string_to_int l =
-  match l with
-  | [] -> []
-  | h :: t -> (int_of_string h) :: list_string_to_int t ;;
-
 let int_lines = list_string_to_int lines ;;
 
 (* compute total number of measurements that are larger

@@ -23,3 +23,7 @@ let rec list_string_to_int l =
   match l with
   | [] -> []
   | h :: t -> (int_of_string h) :: list_string_to_int t ;;
+
+let rec string_to_list s a b =
+  if (a > b) then []
+  else String.make 1 s.[a] :: string_to_list s (a + 1) b ;;

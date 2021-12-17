@@ -21,14 +21,10 @@ let rec get_freq_of_digits l a b =
 
 let digits_freq = get_freq_of_digits lines 0 (length_of_num-1) ;;
 
-let rule x =
-  if x < half_length then 0
-  else 1 ;;
-
-let rec decode l =
+let rec decode l token =
   match l with
   | [] -> []
-  | h :: t -> rule h :: decode t ;;
+  | h :: t -> (if h < token then 0 else 1) :: decode t token ;;
 
 let rec flip_bits l =
   match l with
@@ -40,9 +36,8 @@ let rec binary_to_decimal l =
   | [] -> 0.
   | h :: t -> (float_of_int h) *. 2. ** float_of_int (List.length t) +. binary_to_decimal t ;;
 
-let gamma_rate_binary = decode digits_freq ;;
+let gamma_rate_binary = decode digits_freq half_length ;;
 let epsilon_rate_binary = flip_bits gamma_rate_binary ;;
-
 let gamma_rate_decimal = binary_to_decimal gamma_rate_binary;;
 let epsilon_rate_decimal = binary_to_decimal epsilon_rate_binary;;
 

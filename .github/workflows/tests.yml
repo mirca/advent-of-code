@@ -1,8 +1,8 @@
 name: Tests
 
 on:
-  pull_request:
-  push:
+  - pull_request
+  - push
 
 jobs:
   build:
@@ -12,8 +12,12 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-        ocaml-compiler:
-          - 4.13.x
+          - windows-latest
+        ocaml-version:
+          - 4.11.0
+          - 4.10.1
+          - 4.09.1
+          - 4.08.1
 
     runs-on: ${{ matrix.os }}
 
@@ -21,13 +25,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Use OCaml ${{ matrix.ocaml-compiler }}
-        uses: ocaml/setup-ocaml@v2
+      - name: Use OCaml ${{ matrix.ocaml-version }}
+        uses: avsm/setup-ocaml@v1
         with:
-          ocaml-compiler: ${{ matrix.ocaml-compiler }}
+          ocaml-version: ${{ matrix.ocaml-version }}
 
-      - run: opam install . --deps-only --with-test
+      - run: opam install . --deps-only --with-doc --with-test
 
       - run: opam exec -- dune build
 
       - run: opam exec -- dune runtest
+
+      - name: Upload the build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.os }}-${{ matrix.ocaml-version }}-tests.exe
+          path: _build/default/tests.exe

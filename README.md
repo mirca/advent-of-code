@@ -1,2 +1,2 @@
 # advent-of-code
-my solutions to aoc in ocaml
+my solutions to [advent of code](https://adventofcode.com/) in ocaml

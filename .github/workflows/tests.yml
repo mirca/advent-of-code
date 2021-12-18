@@ -30,6 +30,10 @@ jobs:
         with:
           ocaml-version: ${{ matrix.ocaml-version }}
 
+      - run: opam pin add advent_of_code.dev . --no-action
+
+      - run: opam depext advent_of_code --yes --with-doc --with-test
+
       - run: opam install . --deps-only --with-doc --with-test
 
       - run: opam exec -- dune build

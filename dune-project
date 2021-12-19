@@ -8,7 +8,7 @@
 
 (authors "Ze Vinicius <jvmirca@gmail.com>")
 
-(authors "Ze Vinicius <jvmirca@gmail.com>")
+(maintainers "Ze Vinicius <jvmirca@gmail.com>")
 
 (source
  (github mirca/advent-of-code))
@@ -24,7 +24,6 @@
  (synopsis "my solutions to advent of code in ocaml")
  (description "my solutions to advent of code in ocaml")
  (depends
-  (alcotest :with-test)
   (ocaml
-   (>= 4.02.3))
+   (>= 4.13.1))
   dune))

@@ -37,6 +37,13 @@ let rec find_repeated_character lst1 lst2 =
   | h :: tail -> if is_in_list h lst2 then h
               else find_repeated_character tail lst2
 
+
+ let rec find_repeated_char_list lst1 lst2 =
+   match lst1 with
+   | [] -> []
+   | h :: tail -> if is_in_list h lst2 then [h] @ (find_repeated_char_list tail lst2)
+               else find_repeated_char_list tail lst2
+
 let rec find_priorities lines =
   match lines with
   | [] -> []
@@ -71,3 +78,17 @@ let num_priorities = convert_priorities priorities ;;
 let _ = sum_list_int num_priorities ;;
 
 (* PART II *)
+
+let rec find_badges lines =
+  match lines with
+  | [] -> []
+  | s1 :: s2 :: s3 :: tail ->
+                  let lst1 = string_to_list_of_chars s1 in
+                  let lst2 = string_to_list_of_chars s2 in 
+                  let lst3 = string_to_list_of_chars s3 in
+                  let badge = find_repeated_character (find_repeated_char_list lst1 lst2) lst3 in 
+                  [badge] @ (find_badges tail);;
+
+let badges = find_badges lines ;;
+let num_badges = convert_priorities badges ;;
+let _ = sum_list_int num_badges ;;
